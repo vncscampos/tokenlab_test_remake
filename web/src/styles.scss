@@ -1,9 +1,21 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;500&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   border: none;
   box-sizing: border-box;
+}
+
+:root {
+  --color-dark-blue: #2F2E41;
+  --color-soft-blue: #0CD4E0;
+  --color-background: #F0F0F5;
+  --color-gray: #A4A4A4;
+  --color-font: #4B4B4B;
+  --color-red: #F46E6E;
 }

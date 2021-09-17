@@ -1,0 +1,31 @@
+.form-group {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  width: 20rem;
+
+  i {
+    margin: 0 10px;
+    font-size: 1.25rem;
+
+    color: var(--color-gray);
+  }
+
+  input {
+    border: 0;
+    border-radius: 6px;
+
+    &::placeholder {
+      color: var(--color-gray);
+      font-family: "Ubuntu", sans-serif;
+      font-weight: 500;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .form-group {
+      width: 14rem;
+    }
+  }
+}
