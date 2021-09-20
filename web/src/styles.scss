@@ -11,6 +11,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  background: var(--color-background);
+}
+
 :root {
   --color-dark-blue: #2F2E41;
   --color-soft-blue: #0CD4E0;

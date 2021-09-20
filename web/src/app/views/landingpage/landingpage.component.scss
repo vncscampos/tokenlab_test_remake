@@ -54,7 +54,12 @@ h2 {
 }
 
 @media(max-width: 380px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   img {
-    width: ;
+    width: 250px;
   }
 }

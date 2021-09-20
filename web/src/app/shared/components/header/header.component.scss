@@ -1,0 +1,41 @@
+.navbar {
+    background: linear-gradient(76.6deg, #FD52FF 7.16%, #00DBDE 91.96%, #00DBDE 91.96%);
+    align-items: center;
+    padding: 5px 3rem;
+
+    .logout {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        p {
+            margin: 0;
+            margin-left: 1rem;
+            text-align: center;
+
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 500;
+            color: #fff;
+
+            cursor: pointer;
+        }
+
+        i {
+            font-size: 1.6rem;
+            color: #fff;
+
+            cursor: pointer;
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .navbar {
+        padding: 5px 1.7rem;
+    }
+
+    img {
+        width: 200px;
+    }
+}
+

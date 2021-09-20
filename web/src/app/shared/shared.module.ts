@@ -3,18 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HeaderService } from './components/header/header.service';
 
 @NgModule({
   declarations: [
     InputComponent,
-    ButtonComponent
+    ButtonComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
     InputComponent,
-    ButtonComponent
+    ButtonComponent,
+    HeaderComponent
+  ],
+  providers: [
+    HeaderService
   ]
 })
 export class SharedModule { }
