@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
   selector: 'app-create-event',
@@ -8,7 +11,16 @@ import { Component } from '@angular/core';
 export class CreateEventComponent {
   banner = '/assets/create_banner.svg';
 
-  onSubmit(form: Object) {
-    console.log(form);
+  constructor(private formService: FormService) { }
+
+  onSubmit(form: NgForm) {
+    const { description, start_hour, start_date, end_hour, end_date } = form.value;
+    this.formService.submit({
+      description, 
+      start_hour, 
+      start_date, 
+      end_hour, 
+      end_date
+    });
   }
 }

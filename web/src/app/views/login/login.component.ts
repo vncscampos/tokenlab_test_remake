@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   logo = '/assets/logo.svg';
+
+  constructor(private form: FormGroup) {  }
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      email: new FormControl(null),
+      pass: new FormControl(null)
+    });
+  }
 }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HeaderService } from './components/header/header.service';
+import { FormService } from './services/form.service';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,6 @@ import { HeaderService } from './components/header/header.service';
     ButtonComponent,
     HeaderComponent
   ],
-  providers: [
-    HeaderService
-  ]
+  providers: [FormService]
 })
 export class SharedModule { }

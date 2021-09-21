@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { HeaderService } from './header.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +9,5 @@ import { HeaderService } from './header.service';
 export class HeaderComponent {
   logo = '/assets/logo.svg';
 
-  onClick() {
-    const headerService = new HeaderService();
-    headerService.getClick();
-  }
+  onClick() { }
 }

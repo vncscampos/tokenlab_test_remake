@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <img [src]="banner" alt="" class="img-fluid">
+                <img [src]="banner" alt="">
             </div>
             <div class="col">
                 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
@@ -19,14 +19,14 @@
                     </div>
                     <div class="form-group">
                         <label id="start">Início:</label>
-                        <div>
+                        <div class="date-field">
                             <input type="time" name="start_hour" ngModel />
                             <input type="date" name="start_date" ngModel />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Término:</label>
-                        <div>
+                        <div class="date-field">
                             <input type="time" name="end_hour" ngModel />
                             <input type="date" name="end_date" ngModel />
                         </div>
