@@ -36,6 +36,7 @@
     textarea {
         padding: 10px 16px;
         resize: vertical;
+        color: var(--color-gray);
 
         &::placeholder {
             color: var(--color-gray);

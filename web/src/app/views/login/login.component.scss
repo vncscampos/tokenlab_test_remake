@@ -1,24 +1,25 @@
 .background {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-
-  background: linear-gradient(76.6deg, #FD52FF 7.16%, #00DBDE 91.96%, #00DBDE 91.96%);
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-form {
-  margin-top: 30px;
-}
-
-@media(max-width: 320px) {
-  img {
-    width: 220px;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  
+    background: linear-gradient(76.6deg, #FD52FF 7.16%, #00DBDE 91.96%, #00DBDE 91.96%);
   }
-}
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  form {
+    margin-top: 30px;
+  }
+  
+  @media(max-width: 320px) {
+    img {
+      width: 220px;
+    }
+  }
+  

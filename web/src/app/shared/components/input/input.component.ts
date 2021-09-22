@@ -1,3 +1,4 @@
+import { FormControl, FormControlName, FormGroup } from '@angular/forms';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -9,4 +10,8 @@ export class InputComponent {
   @Input() placeHolder: string = '';
   @Input() typeInput: string = '';
   @Input() classInput: string = '';
+
+  @Input() form!: FormGroup;
+
+  constructor() { }
 }

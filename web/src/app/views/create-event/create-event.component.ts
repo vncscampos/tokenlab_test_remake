@@ -14,13 +14,14 @@ export class CreateEventComponent {
   constructor(private formService: FormService) { }
 
   onSubmit(form: NgForm) {
-    const { description, start_hour, start_date, end_hour, end_date } = form.value;
+    const { description, start_hour, start_date, end_hour, end_date, invites } = form.value;
     this.formService.submit({
       description, 
       start_hour, 
       start_date, 
       end_hour, 
-      end_date
+      end_date,
+      invites
     });
   }
 }

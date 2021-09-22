@@ -12,7 +12,6 @@ import { LandingpageComponent } from './views/landingpage/landingpage.component'
 import { HomeComponent } from './views/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CreateEventComponent } from './views/create-event/create-event.component';
-import { LoginModule } from './views/login/login.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { LoginModule } from './views/login/login.module';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

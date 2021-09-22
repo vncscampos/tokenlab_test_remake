@@ -1,12 +1,11 @@
-<p>funciona ae man</p>
-<!-- <div class="background">
+<div class="background">
   <div class="container">
     <img [src]="logo" alt="ListEventos">
-    <form class="form-signin">
-      <app-input [placeHolder]="'Nome'" [typeInput]="'text'" [classInput]="'bi bi-person'"></app-input>
-      <app-input [placeHolder]="'Email'" [typeInput]="'email'" [classInput]="'bi bi-envelope'"></app-input>
-      <app-input [placeHolder]="'Senha'" [typeInput]="'password'" [classInput]="'bi bi-key'"></app-input>
+    <form class="form-signin" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <app-input [placeHolder]="'Nome'" [typeInput]="'name'" [classInput]="'bi bi-person'" [form]="form"></app-input>
+      <app-input [placeHolder]="'Email'" [typeInput]="'email'" [classInput]="'bi bi-envelope'" [form]="form"></app-input>
+      <app-input [placeHolder]="'Senha'" [typeInput]="'password'" [classInput]="'bi bi-key'" [form]="form"></app-input>
       <app-button [text]="'Cadastrar'"></app-button>
     </form>
   </div>
-</div> -->
+</div>

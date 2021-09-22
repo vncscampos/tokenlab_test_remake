@@ -1,5 +1,5 @@
-<div class="form-group">
+<div class="form-group" [formGroup]="form">
   <i class="{{classInput}}"></i>
   <input type="{{typeInput}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-    placeholder="{{placeHolder}}">
+    placeholder="{{placeHolder}}" formControlName="{{typeInput}}">
 </div>

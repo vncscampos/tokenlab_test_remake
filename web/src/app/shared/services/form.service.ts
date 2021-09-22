@@ -6,6 +6,7 @@ interface IFormValue {
   start_date: string,
   end_hour: string,
   end_date: string,
+  invites: string
 }
 
 @Injectable({
@@ -15,7 +16,7 @@ export class FormService {
 
   constructor() { }
 
-  submit({ description, start_hour, start_date, end_hour, end_date }: IFormValue) {
+  submit({ description, start_hour, start_date, end_hour, end_date, invites }: IFormValue) {
     console.log(description);
   }
 }
