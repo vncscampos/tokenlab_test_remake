@@ -1,4 +1,4 @@
-import { FormControl, FormControlName, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -11,7 +11,8 @@ export class InputComponent {
   @Input() typeInput: string = '';
   @Input() classInput: string = '';
 
-  @Input() form!: FormGroup;
+  // @ts-ignore
+  @Input() form: FormGroup;
 
   constructor() { }
 }
