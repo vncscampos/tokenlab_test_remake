@@ -1,29 +1,39 @@
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, ApolloError } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
+import { GraphQLError } from 'graphql';
 
 import './database';
 import { resolvers } from './resolvers';
-
-// TODA request é POST
-// TODA request bate no mesmo endpoint
-
-// Query -> GET
-// Mutation -> POST/PUT/DELETE
-// Scalar types -> string, int, boolean, float e ID
+import ensureAuthenticated from './app/middlewares/ensureAuthenticated';
 
 export async function startApolloServer() {
   const app = express();
 
-  // Inicialização do ApolloServer
+  // ApolloServer startup
   const server = new ApolloServer({
     schema: await buildSchema({
       resolvers,
+      authChecker: ensureAuthenticated
     }),
-    context: ({ req, res }) => ({ req, res }),
+    context: ({ req, res }) => {
+      const context = {
+        req,
+        token: req?.headers?.authorization,
+    };
+
+    return context;
+    },
+    formatError: (error: GraphQLError) => {
+      if(error.originalError instanceof ApolloError) {
+        return error;
+      }
+
+      return new GraphQLError(error.message);
+    }
   });
 
-  // Lógica para integrar o express
+  // Logic to integrate express
   await server.start();
   server.applyMiddleware({ app, path: '/graphql' });
   return app;
