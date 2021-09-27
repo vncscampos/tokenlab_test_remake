@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Arg, Authorized, Ctx } from 'type-graphql';
 import { Request } from 'express';
 
 import EventService from '../services/EventService';
+import GuestService from '../../guests/services/GuestService';
 import Event from '../../../entities/Event';
 
 interface Context {
@@ -23,6 +24,7 @@ class EventResolver {
     @Arg('description') description: string,
     @Arg('start_date') start_date: string,
     @Arg('end_date') end_date: string,
+    @Arg('guests') guests: string,
   ) {
     try {
       const user_id = context.req.user.id;
@@ -33,6 +35,15 @@ class EventResolver {
         start_date,
         end_date,
       });
+
+      let newInvites;
+      if (guests) {
+        const guestService = new GuestService();
+
+        newInvites = await guestService.create(guests, event.id);
+      }
+
+      event.guest = newInvites;
 
       return event;
     } catch (err) {
@@ -74,6 +85,7 @@ class EventResolver {
 
       const message = await this.eventService.delete(id, user_id);
 
+      return message;
     } catch (err) {
       return err;
     }
@@ -83,7 +95,8 @@ class EventResolver {
   @Query(() => [Event])
   async events(@Ctx() context: Context) {
     const user_id = context.req.user.id;
-
+    
+    
     const events = await this.eventService.list(user_id);
 
     return events;

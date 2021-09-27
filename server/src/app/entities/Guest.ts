@@ -1,5 +1,4 @@
 import { v4 as uuid } from 'uuid';
-import { Field, ObjectType } from 'type-graphql';
 import {
   Entity,
   Column,
@@ -8,22 +7,18 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  OneToMany,
 } from 'typeorm';
+import { ObjectType, Field, ID } from 'type-graphql';
 
 import User from './User';
-import Guest from './Guest';
+import Event from './Event';
 
 @ObjectType()
-@Entity('events')
-class Event {
-  @Field()
+@Entity('guests')
+class Guest {
+  @Field(() => ID)
   @PrimaryColumn()
   id: string;
-
-  @Field()
-  @Column()
-  description: string;
 
   @JoinColumn({ name: 'user_id' })
   @ManyToOne(() => User)
@@ -33,16 +28,13 @@ class Event {
   @Column()
   user_id: string;
 
-  @Field()
-  @Column()
-  start_date: Date;
+  @JoinColumn({ name: 'event_id' })
+  @ManyToOne(() => Event)
+  event: Event;
 
   @Field()
   @Column()
-  end_date: Date;
-
-  @OneToMany(() => Guest, guest => guest.event)
-  guest: Guest[];
+  event_id: string;
 
   @Field()
   @CreateDateColumn()
@@ -59,4 +51,4 @@ class Event {
   }
 }
 
-export default Event;
+export default Guest;
