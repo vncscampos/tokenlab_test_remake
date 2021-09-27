@@ -43,8 +43,6 @@ class EventResolver {
         newInvites = await guestService.create(guests, event.id);
       }
 
-      event.guest = newInvites;
-
       return event;
     } catch (err) {
       return err;
