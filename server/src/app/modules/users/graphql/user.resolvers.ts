@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Arg } from 'type-graphql';
+import { Resolver, Mutation, Arg } from 'type-graphql';
 import UserService from '../services/UserService';
 import User from '../../../entities/User';
 
@@ -26,12 +26,6 @@ class UserResolver {
     } catch (err) {
       return err;
     }
-  }
-
-  @Query(() => [User])
-  async users() {
-    const users = await this.userService.list();
-    return users;
   }
 }
 

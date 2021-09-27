@@ -35,12 +35,6 @@ class UserService {
 
     return user;
   }
-
-  async list() {
-    const users = await this.userRepository.find();
-
-    return users;
-  }
 }
 
 export default UserService;
