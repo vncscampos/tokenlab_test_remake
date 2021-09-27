@@ -95,8 +95,7 @@ class EventResolver {
   @Query(() => [Event])
   async events(@Ctx() context: Context) {
     const user_id = context.req.user.id;
-    
-    
+
     const events = await this.eventService.list(user_id);
 
     return events;
