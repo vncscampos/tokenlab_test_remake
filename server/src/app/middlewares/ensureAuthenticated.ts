@@ -19,11 +19,11 @@ const ensureAuthenticated: AuthChecker<Context> = ({
   context: Context,
 }): boolean => {
   const authHeader = Context.token;
-
+  
   if (!authHeader) {
     throw new Error('JWT token is missing');
   }
-
+  
   const [, token] = authHeader.split(' ');
 
   try {

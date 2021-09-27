@@ -7,6 +7,7 @@ import EventRepository from '../../../repositories/EventRepository';
 import UserRepository from '../../../repositories/UserRepository';
 
 interface IEventCreate {
+  id: string;
   user_id: string;
   description: string;
   start_date: string;
@@ -76,10 +77,13 @@ class EventService {
     return events;
   }
 
-  async update(
-    id: string,
-    { user_id, description, start_date, end_date }: IEventCreate,
-  ) {
+  async update({
+    id,
+    user_id,
+    description,
+    start_date,
+    end_date,
+  }: IEventCreate) {
     const user = await this.userRepository.findOne({ id: user_id });
 
     if (!user) {
@@ -109,7 +113,7 @@ class EventService {
     return event;
   }
 
-  async delete(id: string, user_id: string) {
+  async delete({ id, user_id }: IEventCreate) {
     const user = await this.userRepository.findOne({ id: user_id });
 
     if (!user) {
