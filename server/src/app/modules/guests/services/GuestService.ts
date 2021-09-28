@@ -1,6 +1,4 @@
 import { getCustomRepository, Repository } from 'typeorm';
-import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
 
 import User from '../../../entities/User';
 import Guest from '../../../entities/Guest';
@@ -9,7 +7,8 @@ import UserRepository from '../../../repositories/UserRepository';
 import GuestRepository from '../../../repositories/GuestRepository';
 import EventRepository from '../../../repositories/EventRepository';
 
-import Mail from '../../../../lib/Mail';
+import Queue from '../../../../lib/Queue';
+import InviteMail from '../../../jobs/InviteMail';
 
 class EventService {
   private eventRepository: Repository<Event>;
@@ -41,17 +40,9 @@ class EventService {
 
       await this.guestRepository.save(guest);
 
-      await Mail.sendMail({
-        to: `${user.name} <${user.email}>`,
-        subject: 'Você recebeu um novo convite',
-        template: 'invitation',
-        context: {
-          name: user.name,
-          date: format(event.start_date, "dd 'de' MMMM', às' H:mm'h'", {
-            locale: pt,
-          }),
-          description: event.description,
-        },
+      await Queue.add(InviteMail.key, {
+        user,
+        event,
       });
     });
 
