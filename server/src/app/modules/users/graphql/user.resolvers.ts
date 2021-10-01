@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg } from 'type-graphql';
+import { Resolver, Mutation, Arg, Query } from 'type-graphql';
 import * as Yup from 'yup';
 
 import UserService from '../services/UserService';
@@ -9,6 +9,11 @@ class UserResolver {
   userService: any;
   constructor() {
     this.userService = new UserService();
+  }
+
+  @Query(() => Boolean)
+  user() {
+    return true;
   }
 
   @Mutation(() => User)

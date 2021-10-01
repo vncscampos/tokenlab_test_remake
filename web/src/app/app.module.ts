@@ -12,6 +12,8 @@ import { LandingpageComponent } from './views/landingpage/landingpage.component'
 import { HomeComponent } from './views/home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { CreateEventComponent } from './views/create-event/create-event.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { CreateEventComponent } from './views/create-event/create-event.componen
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    GraphQLModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,22 +1,69 @@
 import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable, Subject } from 'rxjs';
 
-interface IFormValue {
-  description: string,
-  start_hour: string,
-  start_date: string,
-  end_hour: string,
-  end_date: string,
-  invites: string
+interface IFormLogin {
+  email: string;
+  password: string;
+}
+
+interface IFormUser {
+  name: string;
+  email: string;
+  password: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
+  constructor(private apollo: Apollo) {}
 
-  constructor() { }
+  submitLogin({ email, password }: IFormLogin): Observable<string> {
+    const login = gql`
+      mutation ($password: String!, $email: String!) {
+        session(password: $password, email: $email) {
+          token
+        }
+      }
+    `;
 
-  submit({ description, start_hour, start_date, end_hour, end_date, invites }: IFormValue) {
-    console.log(description);
+    var subject = new Subject<string>();
+
+    this.apollo
+      .mutate<any>({
+        mutation: login,
+        variables: { email, password },
+      })
+      .subscribe(
+        ({ data }) => {
+          subject.next(data?.session.token);
+        });
+
+      return subject;
+  }
+
+  submitUser({ name, email, password }: IFormUser): Observable<string> {
+    const createUser = gql`
+      mutation ($password: String!, $email: String!, $name: String!) {
+        createUser(password: $password, email: $email, name: $name) {
+          email
+        }
+      }
+    `;
+
+    var subject = new Subject<string>();
+
+    this.apollo
+      .mutate<any>({
+        mutation: createUser,
+        variables: { name, email, password },
+      })
+      .subscribe(
+        ({ data }) => {
+          subject.next(data?.createUser.email);
+        });
+
+    return subject.asObservable();
   }
 }

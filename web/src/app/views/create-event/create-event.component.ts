@@ -15,7 +15,7 @@ export class CreateEventComponent {
 
   onSubmit(form: NgForm) {
     const { description, start_hour, start_date, end_hour, end_date, invites } = form.value;
-    this.formService.submit({
+    this.formService.submitEvent({
       description, 
       start_hour, 
       start_date, 

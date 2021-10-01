@@ -6,6 +6,7 @@ import { InputComponent } from './components/input/input.component';
 import { ButtonComponent } from './components/button/button.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FormService } from './services/form.service';
+import { EventService } from './services/event.service';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,13 @@ import { FormService } from './services/form.service';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     InputComponent,
     ButtonComponent,
     HeaderComponent,
   ],
-  providers: [FormService]
+  providers: [FormService, EventService]
 })
 export class SharedModule { }
