@@ -22,4 +22,42 @@ export class EventService {
       query: events,
     });
   }
+
+  getInvites() {
+    const guests = gql`
+      query {
+        guests {
+          id
+          description
+          start_date
+          end_date
+        }
+      }
+    `;
+    return this.apollo.watchQuery<any>({
+      query: guests,
+    });
+  }
+
+  deleteEvents(id: string) {
+    const remove = gql`
+      mutation ($id: String!) {
+        deleteEvent(id: $id)
+      }
+    `;
+
+    this.apollo
+      .mutate<any>({
+        mutation: remove,
+        variables: { id },
+      })
+      .subscribe(
+        ({ data }) => {
+          alert('Evento removido com sucesso!');
+        },
+        (error) => {
+          alert(error);
+        }
+      );
+  }
 }

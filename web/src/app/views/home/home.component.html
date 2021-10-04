@@ -2,18 +2,18 @@
 <div class="container-fluid">
     <div class="header">
         <div class="title-header" *ngIf="myEvents">
-            <button (click)="onClick(true)">
+            <button (click)="switch(true)">
                 <h1>Meus eventos</h1>
             </button>
-            <button (click)="onClick(false)">
+            <button (click)="switch(false)">
                 <h2>Meus convites</h2>
             </button>
         </div>
         <div class="title-header" *ngIf="!myEvents">
-            <button (click)="onClick(true)">
+            <button (click)="switch(true)">
                 <h2>Meus eventos</h2>
             </button>
-            <button (click)="onClick(false)">
+            <button (click)="switch(false)">
                 <h1>Meus convites</h1>
             </button>
         </div>
@@ -24,8 +24,8 @@
             <div class="event-header">
                 <strong>{{event.start_date}} - {{event.end_date}}</strong>
                 <div>
-                    <i id="pen" class="bi bi-pencil-fill"></i>
-                    <i id="trash" class="bi bi-trash-fill"></i>
+                    <i id="pen" class="bi bi-pencil-fill" (click)="update(event)"></i>
+                    <i id="trash" class="bi bi-trash-fill" (click)="remove(event.id)"></i>
                 </div>
             </div>
             <p>{{event.description}}</p>
