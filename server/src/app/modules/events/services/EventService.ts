@@ -119,8 +119,9 @@ class EventService {
     if (!user) {
       throw new Error('User not found!');
     }
-
+    
     const event = await this.eventRepository.findOne({ id });
+
 
     if (!event) {
       throw new Error('Event not found!');

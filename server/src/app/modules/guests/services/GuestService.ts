@@ -87,6 +87,8 @@ class EventService {
       throw new Error('Event not found!');
     }
 
+    console.log('hmm')
+
     const guest = await this.guestRepository.findOne({ event_id, user_id });
 
     if (!guest) {

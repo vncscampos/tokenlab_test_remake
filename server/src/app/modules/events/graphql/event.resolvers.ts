@@ -81,7 +81,7 @@ class EventResolver {
     try {
       const user_id = context.req.user.id;
 
-      const message = await this.eventService.delete(id, user_id);
+      const message = await this.eventService.delete({ id, user_id });
 
       return message;
     } catch (err) {
