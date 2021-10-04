@@ -20,9 +20,9 @@
         <a routerLink="/event">Criar evento</a>
     </div>
     <ul>
-        <li *ngFor="let event of events">
+        <li *ngFor="let event of events | async">
             <div class="event-header">
-                <strong>{{event.date}}</strong>
+                <strong>{{event.start_date}} - {{event.end_date}}</strong>
                 <div>
                     <i id="pen" class="bi bi-pencil-fill"></i>
                     <i id="trash" class="bi bi-trash-fill"></i>

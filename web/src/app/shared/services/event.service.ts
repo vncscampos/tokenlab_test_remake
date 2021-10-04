@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
-
-interface IEvent {
-  
-}
+import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
+  constructor(private apollo: Apollo) {}
 
-  constructor() { }
+  getEvents() {
+    const events = gql`
+      query events {
+        events {
+          id
+          description
+          start_date
+          end_date
+        }
+      }
+    `;
+    return this.apollo.watchQuery<any>({
+      query: events,
+    });
+  }
 }

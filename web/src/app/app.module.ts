@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { CreateEventComponent } from './views/create-event/create-event.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     GraphQLModule,
     HttpClientModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
