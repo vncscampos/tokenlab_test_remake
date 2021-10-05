@@ -38,6 +38,10 @@ class EventService {
       throw new Error('Past date are no permitted!');
     }
 
+    if(new Date(start_date).getDate() > new Date(end_date).getDate() || new Date(start_date).getMonth() > new Date(end_date).getMonth()) {
+      throw new Error('Start date greater than end date is not allowed!');
+    }
+
     // Check if you already have an event at this time
     const checkAvailability = await this.eventRepository.findOne({
       where: {
