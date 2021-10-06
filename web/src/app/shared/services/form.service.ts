@@ -19,16 +19,21 @@ interface IFormUser {
 export class FormService {
   constructor(private apollo: Apollo) {}
 
-  submitLogin({ email, password }: IFormLogin): Observable<string> {
+  submitLogin({ email, password }: IFormLogin): Observable<any> {
     const login = gql`
       mutation ($password: String!, $email: String!) {
         session(password: $password, email: $email) {
           token
+          user {
+            id 
+            name 
+            email 
+          }
         }
       }
     `;
 
-    var subject = new Subject<string>();
+    var subject = new Subject<any>();
 
     this.apollo
       .mutate<any>({
@@ -37,10 +42,10 @@ export class FormService {
       })
       .subscribe(
         ({ data }) => {
-          subject.next(data?.session.token);
+          subject.next(data?.session);
         });
 
-      return subject;
+      return subject.asObservable();
   }
 
   submitUser({ name, email, password }: IFormUser): Observable<string> {

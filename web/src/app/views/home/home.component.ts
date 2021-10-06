@@ -47,6 +47,10 @@ export class HomeComponent implements OnInit {
   }
 
   remove(id: string): void {
-    this.eventService.deleteEvents(id);
+    if(this.myEvents) {
+      this.eventService.deleteEvents(id);
+    } else {
+      this.eventService.deleteInvites(id);
+    }
   }
 }

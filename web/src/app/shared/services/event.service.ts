@@ -147,8 +147,30 @@ export class EventService {
         variables: { id },
       })
       .subscribe(
-        ({ data }) => {
+        () => {
           alert('Evento removido com sucesso!');
+        },
+        (error) => {
+          alert(error);
+        }
+      );
+  }
+
+  deleteInvites(id: string) {
+    const remove = gql`
+      mutation ($id: String!) {
+        deleteInvite(id: $id)
+      }
+    `;
+
+    this.apollo
+      .mutate<any>({
+        mutation: remove,
+        variables: { id },
+      })
+      .subscribe(
+        () => {
+          alert('Convite removido com sucesso!');
         },
         (error) => {
           alert(error);

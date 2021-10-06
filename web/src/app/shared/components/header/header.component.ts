@@ -14,6 +14,7 @@ export class HeaderComponent {
 
   onClick() {
     localStorage.removeItem('JWT');
+    localStorage.removeItem('user');
     this.apollo.client.resetStore();
     this.router.navigate(['login']);
   }

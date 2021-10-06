@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+
+import { User } from 'src/app/core/models/user.model';
 import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
@@ -43,8 +45,12 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.form.value;
 
     this.formService.submitLogin({ email, password }).subscribe(
-      (token) => {
-        localStorage.setItem('JWT', token);
+      (data) => {
+        const user = new User().desirialize(data.user);
+
+        localStorage.setItem('JWT', data.token);
+        localStorage.setItem("user", JSON.stringify(user));
+
         this.route.navigate(['home']);
       },
       (error) => {
