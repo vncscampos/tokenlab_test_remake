@@ -1,4 +1,4 @@
-import { getCustomRepository, Repository } from 'typeorm';
+import { createQueryBuilder, getCustomRepository, Repository } from 'typeorm';
 import { startOfHour, parseISO, isBefore, endOfHour } from 'date-fns';
 
 import Event from '../../../entities/Event';
@@ -38,7 +38,10 @@ class EventService {
       throw new Error('Past date are no permitted!');
     }
 
-    if(new Date(start_date).getDate() > new Date(end_date).getDate() || new Date(start_date).getMonth() > new Date(end_date).getMonth()) {
+    if (
+      new Date(start_date).getDate() > new Date(end_date).getDate() ||
+      new Date(start_date).getMonth() > new Date(end_date).getMonth()
+    ) {
       throw new Error('Start date greater than end date is not allowed!');
     }
 
@@ -76,7 +79,10 @@ class EventService {
       throw new Error('User not found!');
     }
 
-    const events = await this.eventRepository.find({ user_id });
+    const events = await this.eventRepository.find({
+      where: { user_id },
+      relations: ['guest'],
+    });
 
     return events;
   }
@@ -123,9 +129,8 @@ class EventService {
     if (!user) {
       throw new Error('User not found!');
     }
-    
-    const event = await this.eventRepository.findOne({ id });
 
+    const event = await this.eventRepository.findOne({ id });
 
     if (!event) {
       throw new Error('Event not found!');
