@@ -22,7 +22,7 @@
     <ul>
         <li *ngFor="let event of events | async">
             <div class="event-header">
-                <strong>{{event.start_date}} - {{event.end_date}}</strong>
+                <strong>{{event.start_date | date:'HH:mm'}} {{event.start_date | date:'dd/MM/yy'}} - {{event.end_date | date:'HH:mm'}} {{event.end_date | date:'dd/MM/yy'}}</strong>
                 <div>
                     <i id="pen" class="bi bi-pencil-fill" (click)="update(event)"></i>
                     <i id="trash" class="bi bi-trash-fill" (click)="remove(event.id)"></i>

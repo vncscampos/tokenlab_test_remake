@@ -8,13 +8,14 @@ import { ButtonComponent } from './components/button/button.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FormService } from './services/form.service';
 import { EventService } from './services/event.service';
-import { DateService } from './services/date.service';
+import { InputDatePipe } from './pipes/input-date.pipe';
 
 @NgModule({
   declarations: [
     InputComponent,
     ButtonComponent,
-    HeaderComponent
+    HeaderComponent,
+    InputDatePipe,
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,8 @@ import { DateService } from './services/date.service';
     InputComponent,
     ButtonComponent,
     HeaderComponent,
+    InputDatePipe
   ],
-  providers: [FormService, EventService, DateService]
+  providers: [FormService, EventService]
 })
 export class SharedModule { }

@@ -14,27 +14,28 @@
             <div class="col">
                 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Descreva o evento" rows="3" name="description"
-                            ngModel></textarea>
+                        <textarea class="form-control" placeholder="Descreva seu evento" rows="3" name="description"
+                            [(ngModel)]="event.description"></textarea>
                     </div>
                     <div class="form-group">
                         <label id="start">Início:</label>
                         <div class="date-field">
-                            <input type="time" name="start_hour" ngModel required/>
-                            <input type="date" name="start_date" ngModel required/>
+                            <input type="time" name="start_hour" [ngModel]="event.start_date | date:'HH:mm'" required/>
+                            <input type="date" name="start_date" [ngModel]="event.start_date | inputDate" required/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Término:</label>
                         <div class="date-field">
-                            <input type="time" name="end_hour" ngModel required/>
-                            <input type="date" name="end_date" ngModel required/>
+                            <input type="time" name="end_hour" [ngModel]="event.end_date | date:'HH:mm'" required/>
+                            <input type="date" name="end_date" [ngModel]="event.end_date | inputDate" required/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Digite o email dos convidados" name="invites" ngModel />
+                        <input type="text" class="form-control" placeholder="Digite o email do convidados" name="guests" [(ngModel)]="event.guests" />
                     </div>
-                    <app-button [text]="'Criar evento'"></app-button>
+                    <app-button *ngIf="!isUpdate"[text]="'Criar evento'"></app-button>
+                    <app-button *ngIf="isUpdate"[text]="'Atualizar evento'"></app-button>
                 </form>
             </div>
         </div>

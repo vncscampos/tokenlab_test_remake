@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { Event } from 'src/app/core/models/events.model';
-import { DateService } from 'src/app/shared/services/date.service';
 import { EventService } from 'src/app/shared/services/event.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private dateService: DateService,
     private router: Router
   ) {}
 
@@ -30,25 +28,20 @@ export class HomeComponent implements OnInit {
     this.myEvents = bool;
 
     if (!this.myEvents) {
-      this.events = this.eventService.getInvites().valueChanges.pipe(
-        map((result) => {
-          const events = this.dateService.format(result.data.guests);
-          return events;
-        })
-      );
+      this.events = this.eventService
+        .getInvites()
+        .valueChanges.pipe(map((result) => result.data.guests));
     } else {
-      this.events = this.eventService.getEvents().valueChanges.pipe(
-        map((result) => {
-          const events = this.dateService.format(result.data.events);
-          return events;
-        })
-      );
+      this.events = this.eventService
+        .getEvents()
+        .valueChanges.pipe(map((result) => result.data.events));
     }
   }
 
   update(event: Event) {
+    const { id, description, start_date, end_date, guests } = event;
     this.router.navigate(['event'], {
-      queryParams: { event },
+      queryParams: { id, description, start_date, end_date, guests },
       skipLocationChange: true,
     });
   }

@@ -4,6 +4,7 @@ export class Event implements Deserializable {
   description: string;
   start_date: string;
   end_date: string;
+  guests: string;
 
   desirialize(input: any) {
     Object.assign(this, input);
