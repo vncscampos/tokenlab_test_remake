@@ -1,16 +1,17 @@
-import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 import { graphql, GraphQLSchema } from 'graphql';
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
+import { Request } from 'express';
 
 import { resolvers } from '../src/resolvers';
 import ensureAuthenticated from '../src/app/middlewares/ensureAuthenticated';
 
 describe('Testing resolvers', () => {
   let schema: GraphQLSchema;
+  let connection: Connection;
 
   beforeAll(async () => {
-    createConnection({
+    connection = await createConnection({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
@@ -24,6 +25,10 @@ describe('Testing resolvers', () => {
       resolvers,
       authChecker: ensureAuthenticated,
     });
+  });
+
+  afterAll(async () => {
+    await connection.close();
   });
 
   it('Should be able to register user', async () => {
@@ -40,22 +45,40 @@ describe('Testing resolvers', () => {
 
     const response = await graphql(schema, createUserMutation);
 
-    console.log(response);
+    expect(response.data.createUser.id).toBeDefined();
   });
 
-  // it('login', async () => {
-  //   const createLoginMutation = `
-  //     mutation {
-  //         session(
-  //             email: "user2@email.com",
-  //             password: "0000"
-  //         ) {
-  //             token
-  //         }
-  //     }`;
+  it('Should not be able to register with duplicated email', async () => {
+    const createUserMutation = `
+      mutation {
+          createUser(
+              name: "user6",
+              email: "user6@email.com",
+              password: "!User600"
+          ) {
+              id
+          }
+      }`;
 
-  //   const response = await graphql(schema, createLoginMutation);
+    const response = await graphql(schema, createUserMutation);
 
-  //   console.log(response);
-  // });
+    expect(response.data).toBeNull();
+  });
+
+  it('Should not be able to register with some null field', async () => {
+    const createUserMutation = `
+      mutation {
+          createUser(
+              name: "",
+              email: "",
+              password: ""
+          ) {
+              id
+          }
+      }`;
+
+    const response = await graphql(schema, createUserMutation);
+
+    expect(response.data).toBeNull();
+  });
 });

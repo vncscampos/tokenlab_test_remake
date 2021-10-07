@@ -8,7 +8,7 @@ module.exports = {
 
   collectCoverage: false,
   collectCoverageFrom: [
-    'src/app/**'
+    'src/app/modules/**'
   ],
   coverageDirectory: '__tests__/coverage',
   coverageReporters: [
@@ -19,6 +19,4 @@ module.exports = {
   testMatch: [
     '**/__tests__/**/*.test.ts',
   ],
-
-  timers: 'fake',
 };
