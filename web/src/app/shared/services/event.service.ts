@@ -16,7 +16,7 @@ export class EventService {
     start_hour: string,
     end_date: string,
     end_hour: string,
-    guests: string
+    guests: string = ""
   ): Observable<Event> {
     const createEvent = gql`
       mutation (
@@ -95,7 +95,7 @@ export class EventService {
     start_hour: string,
     end_date: string,
     end_hour: string,
-    guests: string
+    guests: string = ""
   ): Observable<Event> {
     const updateEvent = gql`
       mutation (

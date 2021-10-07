@@ -41,7 +41,6 @@ class Event {
   @Column()
   end_date: Date;
 
-  @Field(() => [Guest])
   @OneToMany(() => Guest, guest => guest.event)
   guest: Guest[];
 
