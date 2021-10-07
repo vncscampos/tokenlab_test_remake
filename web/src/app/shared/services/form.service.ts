@@ -19,35 +19,6 @@ interface IFormUser {
 export class FormService {
   constructor(private apollo: Apollo) {}
 
-  submitLogin({ email, password }: IFormLogin): Observable<any> {
-    const login = gql`
-      mutation ($password: String!, $email: String!) {
-        session(password: $password, email: $email) {
-          token
-          user {
-            id 
-            name 
-            email 
-          }
-        }
-      }
-    `;
-
-    var subject = new Subject<any>();
-
-    this.apollo
-      .mutate<any>({
-        mutation: login,
-        variables: { email, password },
-      })
-      .subscribe(
-        ({ data }) => {
-          subject.next(data?.session);
-        });
-
-      return subject.asObservable();
-  }
-
   submitUser({ name, email, password }: IFormUser): Observable<string> {
     const createUser = gql`
       mutation ($password: String!, $email: String!, $name: String!) {
@@ -64,10 +35,9 @@ export class FormService {
         mutation: createUser,
         variables: { name, email, password },
       })
-      .subscribe(
-        ({ data }) => {
-          subject.next(data?.createUser.email);
-        });
+      .subscribe(({ data }) => {
+        subject.next(data?.createUser.email);
+      });
 
     return subject.asObservable();
   }

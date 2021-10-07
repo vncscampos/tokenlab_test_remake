@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Subject, Observable } from 'rxjs';
+
 import { Event } from 'src/app/core/models/events.model';
 
 @Injectable({

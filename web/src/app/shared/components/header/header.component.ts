@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +10,9 @@ import { Apollo } from 'apollo-angular';
 export class HeaderComponent {
   logo = '/assets/logo.svg';
 
-  constructor(private apollo: Apollo, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   onClick() {
-    localStorage.removeItem('JWT');
-    localStorage.removeItem('user');
-    this.apollo.client.resetStore();
-    this.router.navigate(['login']);
+    this.authService.logout();
   }
 }

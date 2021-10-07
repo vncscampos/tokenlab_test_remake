@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { User } from 'src/app/core/models/user.model';
-import { FormService } from 'src/app/shared/services/form.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   valuePassword: string;
 
   constructor(
-    private formService: FormService,
+    private authService: AuthService,
     private route: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -44,13 +44,14 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const { email, password } = this.form.value;
 
-    this.formService.submitLogin({ email, password }).subscribe(
+    this.authService.session({ email, password }).subscribe(
       (data) => {
         const user = new User().desirialize(data.user);
 
+        
         localStorage.setItem('JWT', data.token);
-        localStorage.setItem("user", JSON.stringify(user));
-
+        localStorage.setItem('user', JSON.stringify(user));
+        
         this.route.navigate(['home']);
       },
       (error) => {

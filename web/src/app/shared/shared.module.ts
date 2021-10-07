@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormService } from './services/form.service';
 import { EventService } from './services/event.service';
 import { InputDatePipe } from './pipes/input-date.pipe';
+import { AuthService } from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,6 @@ import { InputDatePipe } from './pipes/input-date.pipe';
     HeaderComponent,
     InputDatePipe
   ],
-  providers: [FormService, EventService]
+  providers: [FormService, EventService, AuthService]
 })
 export class SharedModule { }
